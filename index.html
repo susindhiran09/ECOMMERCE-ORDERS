@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        #order-list {
+            margin-bottom: 20px;
+        }
+        #order-list li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+        #order-list img {
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+        }
+        #total-items {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>E-commerce Orders</h1>
+    <ul id="order-list"></ul>
+    <p>Total items sold: <span id="total-items">0</span></p>
+
+    <script>
+        // Array of order objects
+        const orders = [
+            
+            { id: 1, item: 'Laptop', quantity: 2, imageUrl: 'https://images.app.goo.gl/iXPU4rMaHrKhsqqz9' },
+            { id: 2, item: 'Phone', quantity: 1, imageUrl: 'path/to/phone.jpg' },
+            { id: 3, item: 'Tablet', quantity: 3, imageUrl: 'path/to/tablet.jpg' },
+            { id: 4, item: 'Monitor', quantity: 4, imageUrl: 'path/to/monitor.jpg' }
+        ];
+
+        // Function to calculate total items sold
+        function calculateTotalItems(orders) {
+            return orders.reduce((total, order) => total + order.quantity, 0);
+        }
+
+        // Function to display orders and total items sold
+        function displayOrders() {
+            const orderList = document.getElementById('order-list');
+            const totalItemsElement = document.getElementById('total-items');
+
+            // Display each order in the list
+            orders.forEach(order => {
+                const li = document.createElement('li');
+
+                // Create and set up the image element
+                const img = document.createElement('img');
+                img.src = order.imageUrl;
+                img.alt = order.item;
+
+                // Create and set up the text content
+                const text = document.createTextNode(`Order ID: ${order.id}, Item: ${order.item}, Quantity: ${order.quantity}`);
+
+                // Append the image and text to the list item
+                li.appendChild(img);
+                li.appendChild(text);
+
+                // Append the list item to the order list
+                orderList.appendChild(li);
+            });
+
+            // Calculate and display total items sold
+            const totalItems = calculateTotalItems(orders);
+            totalItemsElement.textContent = totalItems;
+        }
+
+        // Call the displayOrders function on page load
+        displayOrders();
+    </script>
+</body>
+</html>
